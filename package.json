@@ -8,7 +8,10 @@
 		"lib",
 		"line.js"
 		"station.js",
-		"stop.js"
+		"stop.js",
+		"region.js",
+		"route.js",
+		"schedule.js"
 	],
 	"keywords": [
 		"fptf",

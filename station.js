@@ -23,7 +23,14 @@ const validateStation = (test, station, name = 'station') => {
 		test.ok(station.address.length > 0, name + '.address can\'t be empty')
 	}
 
-	// todo: regions
+	if ('regions' in station) {
+		test.ok(Array.isArray(station.regions), name + '.regions must be an array')
+		for (let i = 0; i < station.regions; i++) {
+			const r = region.stations[i]
+			// todo: what if r is a region object?
+			validateReference(test, r, name + `regions[${i}]`)
+		}
+	}
 }
 
 module.exports = validateStation
