@@ -1,0 +1,25 @@
+{
+	"name": "validate-fptf",
+	"description": "Validate data in the Friendly Public Transport Format.",
+	"version": "0.1.0",
+	"main": "index.js",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"fptf",
+		"friendly public transport format",
+		"public transport",
+		"transit"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/validate-fptf",
+	"repository": "derhuerst/validate-fptf",
+	"bugs": "https://github.com/derhuerst/validate-fptf/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=6"
+	},
+	"dependencies": {
+	}
+}
