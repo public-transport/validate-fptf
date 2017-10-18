@@ -5,7 +5,10 @@
 	"main": "index.js",
 	"files": [
 		"index.js",
-		"lib"
+		"lib",
+		"line.js"
+		"station.js",
+		"stop.js"
 	],
 	"keywords": [
 		"fptf",
