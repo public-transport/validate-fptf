@@ -10,66 +10,66 @@ const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 
 const isField = (obj, f) => {
-	return !is.null(obj[f]) && !is.undefined(obj[f])
+  return !is.null(obj[f]) && !is.undefined(obj[f])
 }
 
 const validateLegs = (_name = 'schedule.legs') => {
-	const validateLeg = (leg, i) => {
-		const name = _name + '[' + i + ']'
+  const validateLeg = (leg, i) => {
+    const name = _name + '[' + i + ']'
 
-		a.ok(is.object(leg) && !is.array(leg), name + ' must be an object')
+    a.ok(is.object(leg) && !is.array(leg), name + ' must be an object')
 
-		// todo: what if leg.origin is a station/stop/location object?
-		validateReference(leg.origin, name + '.origin')
+    // todo: what if leg.origin is a station/stop/location object?
+    validateReference(leg.origin, name + '.origin')
 
-		// todo: what if leg.destination is a station/stop/location object?
-		validateReference(leg.destination, name + '.destination')
+    // todo: what if leg.destination is a station/stop/location object?
+    validateReference(leg.destination, name + '.destination')
 
-		validateDate(leg.departure, name + '.departure')
-		validateDate(leg.arrival, name + '.arrival')
+    validateDate(leg.departure, name + '.departure')
+    validateDate(leg.arrival, name + '.arrival')
 
-		if (isField(leg, 'departurePlatform')) {
-			a.strictEqual(typeof leg.departurePlatform, 'string', name + '.departurePlatform must be a string')
-			a.ok(leg.departurePlatform.length > 0, name + '.departurePlatform can\'t be empty')
-		}
-		if (isField(leg, 'arrivalPlatform')) {
-			a.strictEqual(typeof leg.arrivalPlatform, 'string', name + '.arrivalPlatform must be a string')
-			a.ok(leg.arrivalPlatform.length > 0, name + '.arrivalPlatform can\'t be empty')
-		}
+    if (isField(leg, 'departurePlatform')) {
+      a.strictEqual(typeof leg.departurePlatform, 'string', name + '.departurePlatform must be a string')
+      a.ok(leg.departurePlatform.length > 0, name + '.departurePlatform can\'t be empty')
+    }
+    if (isField(leg, 'arrivalPlatform')) {
+      a.strictEqual(typeof leg.arrivalPlatform, 'string', name + '.arrivalPlatform must be a string')
+      a.ok(leg.arrivalPlatform.length > 0, name + '.arrivalPlatform can\'t be empty')
+    }
 
-		// todo: what if leg.schedule is a schedule object?
-		validateReference(leg.schedule, name + '.schedule')
+    // todo: what if leg.schedule is a schedule object?
+    validateReference(leg.schedule, name + '.schedule')
 
-		validateMode(leg.mode, name + '.mode')
+    validateMode(leg.mode, name + '.mode')
 
-		if (isField(leg, 'public')) {
-			a.strictEqual(typeof leg.public, 'boolean', name + '.public must be a boolean')
-		}
+    if (isField(leg, 'public')) {
+      a.strictEqual(typeof leg.public, 'boolean', name + '.public must be a boolean')
+    }
 
-		// todo: what if leg.operator is a operator object?
-		validateReference(leg.operator, name + '.operator')
-	}
-	return validate
+    // todo: what if leg.operator is a operator object?
+    validateReference(leg.operator, name + '.operator')
+  }
+  return validate
 }
 
 const validateJourney = (journey, name = 'journey') => {
-	validateItem(journey, name)
+  validateItem(journey, name)
 
-	a.strictEqual(journey.type, 'journey', name + '.type must be `journey`')
+  a.strictEqual(journey.type, 'journey', name + '.type must be `journey`')
 
-	validateReference(journey.id, name + '.id')
+  validateReference(journey.id, name + '.id')
 
-	a.ok(Array.isArray(journey.legs), name + '.legs must be an array')
-	a.ok(journey.legs.length > 0, name + '.legs can\'t be empty')
-	journey.legs.forEach(validateLegs(name + '.legs'))
-	// todo: check if sorted correctly
+  a.ok(Array.isArray(journey.legs), name + '.legs must be an array')
+  a.ok(journey.legs.length > 0, name + '.legs can\'t be empty')
+  journey.legs.forEach(validateLegs(name + '.legs'))
+  // todo: check if sorted correctly
 
-	if (isField(journey, 'price')) {
-		a.ok(is.object(journey.price) && !is.array(journey.price), name + '.price must be an object')
-		a.strictEqual(typeof leg.amount, 'number', name + '.amount must be a number')
-		a.strictEqual(typeof leg.currency, 'string', name + '.currency must be a string')
-		a.ok(isCurrencyCode(leg.currency), name + '.currency must be a valid ISO 4217 currency code')
-	}
+  if (isField(journey, 'price')) {
+    a.ok(is.object(journey.price) && !is.array(journey.price), name + '.price must be an object')
+    a.strictEqual(typeof leg.amount, 'number', name + '.amount must be a number')
+    a.strictEqual(typeof leg.currency, 'string', name + '.currency must be a string')
+    a.ok(isCurrencyCode(leg.currency), name + '.currency must be a valid ISO 4217 currency code')
+  }
 }
 
 module.exports = validateJourney

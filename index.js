@@ -10,12 +10,12 @@ const operator = require('./operator')
 const journey = require('./journey')
 
 module.exports = {
-	station,
-	stop,
-	line,
-	region,
-	route,
-	schedule,
-	operator,
-	journey
+  station,
+  stop,
+  line,
+  region,
+  route,
+  schedule,
+  operator,
+  journey
 }

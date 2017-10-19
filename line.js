@@ -20,8 +20,8 @@ const validateLine = (line, name = 'line') => {
   // todo: routes
 
   if (!is.null(line.operator) && !is.undefined(line.operator)) {
-	// todo: what if line.operator is a operator object?
-	validateReference(line.operator, name + '.operator')
+    // todo: what if line.operator is a operator object?
+    validateReference(line.operator, name + '.operator')
   }
 }
 
