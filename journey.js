@@ -1,13 +1,16 @@
 'use strict'
 
-const is = require('is')
+const is = require('@sindresorhus/is')
 const isCurrencyCode = require('is-currency-code')
 
 const validateDate = require('./lib/date')
 const validateMode = require('./lib/mode')
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
-const validateMode = require('./lib/mode')
+
+const isField = (obj, f) => {
+	return !is.null(obj[f]) && !is.undefined(obj[f])
+}
 
 const validateLegs = (test, _name = 'schedule.legs') => {
 	const validateLeg = (leg, i) => {
@@ -24,11 +27,11 @@ const validateLegs = (test, _name = 'schedule.legs') => {
 		validateDate(test, leg.departure, name + '.departure')
 		validateDate(test, leg.arrival, name + '.arrival')
 
-		if ('departurePlatform' in leg) { // todo: null
+		if (isField(leg, 'departurePlatform')) {
 			test.equal(typeof leg.departurePlatform, 'string', name + '.departurePlatform must be a string')
 			test.ok(leg.departurePlatform.length > 0, name + '.departurePlatform can\'t be empty')
 		}
-		if ('arrivalPlatform' in leg) { // todo: null
+		if (isField(leg, 'arrivalPlatform')) {
 			test.equal(typeof leg.arrivalPlatform, 'string', name + '.arrivalPlatform must be a string')
 			test.ok(leg.arrivalPlatform.length > 0, name + '.arrivalPlatform can\'t be empty')
 		}
@@ -38,7 +41,7 @@ const validateLegs = (test, _name = 'schedule.legs') => {
 
 		validateMode(test, leg.mode, name + '.mode')
 
-		if ('public' in leg) {
+		if (isField(leg, 'public')) {
 			test.equal(typeof leg.public, 'boolean', name + '.public must be a boolean')
 		}
 
@@ -60,7 +63,7 @@ const validateJourney = (test, journey, name = 'journey') => {
 	journey.legs.forEach(validateLegs(test, name + '.legs'))
 	// todo: check if sorted correctly
 
-	if ('price' in journey) { // todo: null
+	if (isField(journey, 'price')) {
 		test.ok(is.object(journey.price) && !is.array(journey.price), name + '.price must be an object')
 		test.equal(typeof leg.amount, 'number', name + '.amount must be a number')
 		test.equal(typeof leg.currency, 'string', name + '.currency must be a string')

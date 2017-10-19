@@ -1,5 +1,7 @@
 'use strict'
 
+const is = require('@sindresorhus/is')
+
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 const validateCoordinates = require('./lib/coordinates')
@@ -14,16 +16,16 @@ const validateStation = (test, station, name = 'station') => {
 	test.equal(typeof station.name, 'string', name + '.name must be a string')
 	test.ok(station.name.length > 0, name + '.name can\'t be empty')
 
-	if ('coordinates' in station) { // todo: null
+	if (!is.null(station.coordinates) && !is.undefined(station.coordinates)) {
 		validateCoordinates(test, station.coordinates, name + '.coordinates')
 	}
 
-	if ('address' in station) { // todo: null
+	if (!is.null(station.address) && !is.undefined(station.address)) {
 		test.equal(typeof station.address, 'string', name + '.address must be a string')
 		test.ok(station.address.length > 0, name + '.address can\'t be empty')
 	}
 
-	if ('regions' in station) {
+	if (!is.null(station.regions) && !is.undefined(station.regions)) {
 		test.ok(Array.isArray(station.regions), name + '.regions must be an array')
 		for (let i = 0; i < station.regions; i++) {
 			const r = region.stations[i]

@@ -1,6 +1,6 @@
 'use strict'
 
-const is = require('is')
+const is = require('@sindresorhus/is')
 
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
@@ -18,7 +18,7 @@ const validateSequenceItems = (test, _name = 'schedule.sequence') => {
 		}
 		// todo: check if in a reasonable range
 
-		if ('arrival' in sItem) { // todo: null
+		if (!is.null(sItem.arrival) && !is.undefined(sItem.arrival)) {
 			test.equal(typeof sItem.arrival, 'number', name + '.arrival must be an object')
 			// todo: check if in a reasonable range
 		}

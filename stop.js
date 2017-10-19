@@ -1,5 +1,7 @@
 'use strict'
 
+const is = require('@sindresorhus/is')
+
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 const validateCoordinates = require('./lib/coordinates')
@@ -17,7 +19,7 @@ const validateStop = (test, stop, name = 'stop') => {
   test.equal(typeof stop.name, 'string', name + '.name must be a string')
   test.ok(stop.name.length > 0, name + '.name can\'t be empty')
 
-  if ('coordinates' in stop) { // todo: null
+  if (!is.null(stop.coordinates) && !is.undefined(stop.coordinates)) {
     validateCoordinates(test, stop.coordinates, name + '.coordinates')
   }
 }

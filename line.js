@@ -1,5 +1,7 @@
 'use strict'
 
+const is = require('@sindresorhus/is')
+
 const validateItem = require('./lib/item')
 const validateMode = require('./lib/mode')
 const validateReference = require('./lib/reference')
@@ -16,7 +18,7 @@ const validateLine = (test, line, name = 'line') => {
 
   // todo: routes
 
-  if ('operator' in line) { // todo: null
+  if (!is.null(line.operator) && !is.undefined(line.operator)) {
 	// todo: what if line.operator is a operator object?
 	validateReference(test, line.operator, name + '.operator')
   }
