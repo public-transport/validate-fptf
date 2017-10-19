@@ -11,6 +11,10 @@ const validateMode = require('./lib/mode')
 // as too long, cruise ship routes taken into account.
 const twoWeeks = 2 * 7 * 24 * 60 * 60
 
+const isField = (obj, f) => {
+  return !is.null(obj[f]) && !is.undefined(obj[f])
+}
+
 const validateSequenceItems = (_name = 'schedule.sequence') => {
   const validateSequenceItem = (sItem, i, sItems) => {
     const lastI = sItems.length - 1
@@ -18,14 +22,16 @@ const validateSequenceItems = (_name = 'schedule.sequence') => {
 
     a.ok(is.object(sItem) && !is.array(sItem), name + ' must be an object')
 
-    a.strictEqual(typeof sItem.departure, 'number', name + '.departure must be a number')
+    if (isField(sItem, 'departure') || i !== lastI) {
+      a.strictEqual(typeof sItem.departure, 'number', name + '.departure must be a number')
+    }
     if (i === 0) {
       a.strictEqual(sItem.departure, 0, name + '.departure must be `0`')
-    } else {
+    } else if (i !== lastI) {
       a.ok(sItem.departure < twoWeeks, name + '.departure must b a relative value')
     }
 
-    if (!is.null(sItem.arrival) && !is.undefined(sItem.arrival)) {
+    if (isField(sItem, 'arrival') || i === lastI) {
       a.strictEqual(typeof sItem.arrival, 'number', name + '.arrival must be a number')
       a.ok(sItem.arrival < twoWeeks, name + '.arrival must b a relative value')
     }
