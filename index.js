@@ -6,6 +6,8 @@ const line = require('./line')
 const region = require('./region')
 const route = require('./route')
 const schedule = require('./schedule')
+const operator = require('./operator')
+const journey = require('./journey')
 
 module.exports = {
 	station,
@@ -13,5 +15,7 @@ module.exports = {
 	line,
 	region,
 	route,
-	schedule
+	schedule,
+	operator,
+	journey
 }

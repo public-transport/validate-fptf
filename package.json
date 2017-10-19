@@ -6,12 +6,14 @@
 	"files": [
 		"index.js",
 		"lib",
-		"line.js"
+		"line.js",
 		"station.js",
 		"stop.js",
 		"region.js",
 		"route.js",
-		"schedule.js"
+		"schedule.js",
+		"operator.js",
+		"journey.js"
 	],
 	"keywords": [
 		"fptf",
@@ -29,6 +31,7 @@
 	},
 	"dependencies": {
 		"@sindresorhus/is": "^0.3.0",
+		"is-currency-code": "^1.2.0",
 		"slugg": "^1.2.1"
 	}
 }
