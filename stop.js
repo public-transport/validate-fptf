@@ -1,26 +1,27 @@
 'use strict'
 
+const a = require('assert')
 const is = require('@sindresorhus/is')
 
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 const validateCoordinates = require('./lib/coordinates')
 
-const validateStop = (test, stop, name = 'stop') => {
-  validateItem(test, stop, name)
+const validateStop = (stop, name = 'stop') => {
+  validateItem(stop, name)
 
-  test.equal(stop.type, 'stop', name + '.type must be `stop`')
+  a.strictEqual(stop.type, 'stop', name + '.type must be `stop`')
 
-  validateReference(test, stop.id, name + '.id')
+  validateReference(stop.id, name + '.id')
 
   // todo: what if stop.station is a station object?
-  validateReference(test, stop.station, name + '.station')
+  validateReference(stop.station, name + '.station')
 
-  test.equal(typeof stop.name, 'string', name + '.name must be a string')
-  test.ok(stop.name.length > 0, name + '.name can\'t be empty')
+  a.strictEqual(typeof stop.name, 'string', name + '.name must be a string')
+  a.ok(stop.name.length > 0, name + '.name can\'t be empty')
 
   if (!is.null(stop.coordinates) && !is.undefined(stop.coordinates)) {
-    validateCoordinates(test, stop.coordinates, name + '.coordinates')
+    validateCoordinates(stop.coordinates, name + '.coordinates')
   }
 }
 
