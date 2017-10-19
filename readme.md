@@ -3,6 +3,7 @@
 **Validate data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).** Follows the version of the [*Friendly Public Transport Format* (FPTF) spec](https://github.com/public-transport/friendly-public-transport-format).
 
 [![npm version](https://img.shields.io/npm/v/validate-fptf.svg)](https://www.npmjs.com/package/validate-fptf)
+[![build status](https://img.shields.io/travis/derhuerst/validate-fptf.svg)](https://travis-ci.org/derhuerst/validate-fptf)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/validate-fptf.svg)
 [![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
 

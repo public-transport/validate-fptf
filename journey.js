@@ -37,7 +37,9 @@ const validateLegs = (valItem, _name = 'schedule.legs') => {
 
     valItem(['schedule'], leg.schedule, name + '.schedule')
 
-    validateMode(leg.mode, name + '.mode')
+    if (isField(leg, 'mode')) {
+      validateMode(leg.mode, name + '.mode')
+    }
 
     if (isField(leg, 'public')) {
       a.strictEqual(typeof leg.public, 'boolean', name + '.public must be a boolean')

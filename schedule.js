@@ -9,35 +9,36 @@ const validateMode = require('./lib/mode')
 
 // The threshold above which we can safely consider a sequence
 // as too long, cruise ship routes taken into account.
-const twoWeeks = 2 * 7 * 24 * 60 * 60 * 1000
+const twoWeeks = 2 * 7 * 24 * 60 * 60
 
 const validateSequenceItems = (_name = 'schedule.sequence') => {
-  const validate = (sItem, i) => {
+  const validateSequenceItem = (sItem, i, sItems) => {
+    const lastI = sItems.length - 1
     const name = _name + '[' + i + ']'
 
     a.ok(is.object(sItem) && !is.array(sItem), name + ' must be an object')
 
-    a.strictEqual(typeof sItem.departure, 'number', name + '.departure must be an object')
+    a.strictEqual(typeof sItem.departure, 'number', name + '.departure must be a number')
     if (i === 0) {
-      a.strictEqual(sItem.departure, name + '.departure must be an 0')
+      a.strictEqual(sItem.departure, 0, name + '.departure must be `0`')
     } else {
       a.ok(sItem.departure < twoWeeks, name + '.departure must b a relative value')
     }
 
     if (!is.null(sItem.arrival) && !is.undefined(sItem.arrival)) {
-      a.strictEqual(typeof sItem.arrival, 'number', name + '.arrival must be an object')
+      a.strictEqual(typeof sItem.arrival, 'number', name + '.arrival must be a number')
       a.ok(sItem.arrival < twoWeeks, name + '.arrival must b a relative value')
     }
   }
-  return validate
+  return validateSequenceItem
 }
 
 const validateStarts = (name = 'schedule.starts') => {
-  const validate = (start, i) => {
+  const validateStart = (start, i) => {
     a.strictEqual(typeof start, 'number', name + '[' + i + '] must be a UNIX timestamp')
     // todo: check if in a reasonable range
   }
-  return validate
+  return validateStart
 }
 
 const validateSchedule = (valItem, schedule, name = 'schedule') => {
