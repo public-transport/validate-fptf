@@ -5,7 +5,7 @@ const a = require('assert')
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 
-const validateOperator = (op, name = 'operator') => {
+const validateOperator = (valItem, op, name = 'operator') => {
   validateItem(op, name)
 
   a.strictEqual(op.type, 'operator', name + '.type must be `operator`')

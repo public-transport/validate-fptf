@@ -7,7 +7,7 @@ const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 const validateCoordinates = require('./lib/coordinates')
 
-const validateStation = (station, name = 'station') => {
+const validateStation = (valItem, station, name = 'station') => {
   validateItem(station, name)
 
   a.strictEqual(station.type, 'station', name + '.type must be `station`')
@@ -30,8 +30,7 @@ const validateStation = (station, name = 'station') => {
     a.ok(Array.isArray(station.regions), name + '.regions must be an array')
     for (let i = 0; i < station.regions; i++) {
       const r = station.regions[i]
-      // todo: what if r is a region object?
-      validateReference(r, name + `regions[${i}]`)
+      valItem(['region'], r, name + `regions[${i}]`)
     }
   }
 }

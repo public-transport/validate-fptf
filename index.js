@@ -1,5 +1,11 @@
 'use strict'
 
+const a = require('assert')
+const is = require('@sindresorhus/is')
+
+const validateItem = require('./lib/item')
+const validateReference = require('./lib/reference')
+
 const station = require('./station')
 const stop = require('./stop')
 const line = require('./line')
@@ -9,7 +15,9 @@ const schedule = require('./schedule')
 const operator = require('./operator')
 const journey = require('./journey')
 
-module.exports = {
+const validTypes = require('./lib/valid-types')
+
+const validators = {
   station,
   stop,
   line,
@@ -19,3 +27,22 @@ module.exports = {
   operator,
   journey
 }
+
+const recurse = (allowedTypes, any, name = 'item') => {
+  const typesStr = allowedTypes.join(', ')
+
+  if (is.object(any) && !is.array(any)) {
+    validateItem(any, name)
+
+    a.ok(allowedTypes.includes(any.type), name + '.type must be any of' + typesStr)
+
+    const validator = validators[any.type]
+    validator(recurse, any, name)
+  } else {
+    validateReference(any, name)
+  }
+}
+
+const validate = any => recurse(validTypes, any, 'obj')
+
+module.exports = validate

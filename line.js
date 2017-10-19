@@ -7,7 +7,7 @@ const validateItem = require('./lib/item')
 const validateMode = require('./lib/mode')
 const validateReference = require('./lib/reference')
 
-const validateLine = (line, name = 'line') => {
+const validateLine = (valItem, line, name = 'line') => {
   validateItem(line, name)
 
   a.strictEqual(line.type, 'line', name + '.type must be `line`')
@@ -22,8 +22,7 @@ const validateLine = (line, name = 'line') => {
   // todo: routes
 
   if (!is.null(line.operator) && !is.undefined(line.operator)) {
-    // todo: what if line.operator is a operator object?
-    validateReference(line.operator, name + '.operator')
+    valItem(['operator'], line.operator, name + '.operator')
   }
 }
 

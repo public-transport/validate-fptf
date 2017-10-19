@@ -13,17 +13,15 @@ const isField = (obj, f) => {
   return !is.null(obj[f]) && !is.undefined(obj[f])
 }
 
-const validateLegs = (_name = 'schedule.legs') => {
+const validateLegs = (valItem, _name = 'schedule.legs') => {
   const validateLeg = (leg, i) => {
     const name = _name + '[' + i + ']'
 
     a.ok(is.object(leg) && !is.array(leg), name + ' must be an object')
 
-    // todo: what if leg.origin is a station/stop/location object?
-    validateReference(leg.origin, name + '.origin')
+    valItem(['station', 'stop', 'location'], leg.origin, name + '.origin')
 
-    // todo: what if leg.destination is a station/stop/location object?
-    validateReference(leg.destination, name + '.destination')
+    valItem(['station', 'stop', 'location'], leg.destination, name + '.destination')
 
     validateDate(leg.departure, name + '.departure')
     validateDate(leg.arrival, name + '.arrival')
@@ -37,8 +35,7 @@ const validateLegs = (_name = 'schedule.legs') => {
       a.ok(leg.arrivalPlatform.length > 0, name + '.arrivalPlatform can\'t be empty')
     }
 
-    // todo: what if leg.schedule is a schedule object?
-    validateReference(leg.schedule, name + '.schedule')
+    valItem(['schedule'], leg.schedule, name + '.schedule')
 
     validateMode(leg.mode, name + '.mode')
 
@@ -46,13 +43,12 @@ const validateLegs = (_name = 'schedule.legs') => {
       a.strictEqual(typeof leg.public, 'boolean', name + '.public must be a boolean')
     }
 
-    // todo: what if leg.operator is a operator object?
-    validateReference(leg.operator, name + '.operator')
+    valItem(['operator'], leg.operator, name + '.operator')
   }
   return validateLeg
 }
 
-const validateJourney = (journey, name = 'journey') => {
+const validateJourney = (valItem, journey, name = 'journey') => {
   validateItem(journey, name)
 
   a.strictEqual(journey.type, 'journey', name + '.type must be `journey`')
@@ -61,7 +57,7 @@ const validateJourney = (journey, name = 'journey') => {
 
   a.ok(Array.isArray(journey.legs), name + '.legs must be an array')
   a.ok(journey.legs.length > 0, name + '.legs can\'t be empty')
-  journey.legs.forEach(validateLegs(name + '.legs'))
+  journey.legs.forEach(validateLegs(valItem, name + '.legs'))
   // todo: check if sorted correctly
 
   if (isField(journey, 'price')) {

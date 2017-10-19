@@ -5,7 +5,7 @@ const a = require('assert')
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 
-const validateRegion = (region, name = 'region') => {
+const validateRegion = (valItem, region, name = 'region') => {
   validateItem(region, name)
 
   a.strictEqual(region.type, 'region', name + '.type must be `region`')
@@ -18,8 +18,7 @@ const validateRegion = (region, name = 'region') => {
   a.ok(Array.isArray(region.stations), name + '.stations must be an array')
   for (let i = 0; i < region.stations; i++) {
     const s = region.stations[i]
-    // todo: what if s is a station object?
-    validateReference(s, name + `stations[${i}]`)
+    valItem(['station'], s, name + `stations[${i}]`)
   }
 }
 

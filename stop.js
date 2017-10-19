@@ -7,15 +7,14 @@ const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 const validateCoordinates = require('./lib/coordinates')
 
-const validateStop = (stop, name = 'stop') => {
+const validateStop = (valItem, stop, name = 'stop') => {
   validateItem(stop, name)
 
   a.strictEqual(stop.type, 'stop', name + '.type must be `stop`')
 
   validateReference(stop.id, name + '.id')
 
-  // todo: what if stop.station is a station object?
-  validateReference(stop.station, name + '.station')
+  valItem(['station'], stop.station, name + '.station')
 
   a.strictEqual(typeof stop.name, 'string', name + '.name must be a string')
   a.ok(stop.name.length > 0, name + '.name can\'t be empty')

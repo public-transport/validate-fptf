@@ -35,15 +35,14 @@ const validateStarts = (name = 'schedule.starts') => {
   return validate
 }
 
-const validateSchedule = (schedule, name = 'schedule') => {
+const validateSchedule = (valItem, schedule, name = 'schedule') => {
   validateItem(schedule, name)
 
   a.strictEqual(schedule.type, 'schedule', name + '.type must be `schedule`')
 
   validateReference(schedule.id, name + '.id')
 
-  // todo: what if schedule.route is a route object?
-  validateReference(schedule.route, name + '.route')
+  valItem(['route'], schedule.route, name + '.route')
 
   validateMode(schedule.mode, name + '.mode')
 
