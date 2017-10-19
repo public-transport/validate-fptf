@@ -12,6 +12,8 @@ const validateLine = (line, name = 'line') => {
 
   a.strictEqual(line.type, 'line', name + '.type must be `line`')
 
+  validateReference(line.id, name + '.id')
+
   a.strictEqual(typeof line.name, 'string', name + '.name must be a string')
   a.ok(line.name.length > 0, name + '.name can\'t be empty')
 

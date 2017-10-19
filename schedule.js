@@ -45,7 +45,7 @@ const validateSchedule = (schedule, name = 'schedule') => {
   // todo: what if schedule.route is a route object?
   validateReference(schedule.route, name + '.route')
 
-  validateMode(route.mode, name + '.mode')
+  validateMode(schedule.mode, name + '.mode')
 
   a.ok(Array.isArray(schedule.sequence), name + '.sequence must be an array')
   a.ok(schedule.sequence.length > 0, name + '.sequence can\'t be empty')

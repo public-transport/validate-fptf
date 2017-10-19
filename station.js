@@ -29,7 +29,7 @@ const validateStation = (station, name = 'station') => {
   if (!is.null(station.regions) && !is.undefined(station.regions)) {
     a.ok(Array.isArray(station.regions), name + '.regions must be an array')
     for (let i = 0; i < station.regions; i++) {
-      const r = region.stations[i]
+      const r = station.regions[i]
       // todo: what if r is a region object?
       validateReference(r, name + `regions[${i}]`)
     }

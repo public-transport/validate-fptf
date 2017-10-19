@@ -49,7 +49,7 @@ const validateLegs = (_name = 'schedule.legs') => {
     // todo: what if leg.operator is a operator object?
     validateReference(leg.operator, name + '.operator')
   }
-  return validate
+  return validateLeg
 }
 
 const validateJourney = (journey, name = 'journey') => {
@@ -65,10 +65,11 @@ const validateJourney = (journey, name = 'journey') => {
   // todo: check if sorted correctly
 
   if (isField(journey, 'price')) {
-    a.ok(is.object(journey.price) && !is.array(journey.price), name + '.price must be an object')
-    a.strictEqual(typeof leg.amount, 'number', name + '.amount must be a number')
-    a.strictEqual(typeof leg.currency, 'string', name + '.currency must be a string')
-    a.ok(isCurrencyCode(leg.currency), name + '.currency must be a valid ISO 4217 currency code')
+    const p = journey.price
+    a.ok(is.object(p) && !is.array(p), name + '.price must be an object')
+    a.strictEqual(typeof p.amount, 'number', name + '.price.amount must be a number')
+    a.strictEqual(typeof p.currency, 'string', name + '.price.currency must be a string')
+    a.ok(isCurrencyCode(p.currency), name + '.price.currency must be a valid ISO 4217 currency code')
   }
 }
 
