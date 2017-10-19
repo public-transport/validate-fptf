@@ -7,6 +7,10 @@ const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 const validateMode = require('./lib/mode')
 
+// The threshold above which we can safely consider a sequence
+// as too long, cruise ship routes taken into account.
+const twoWeeks = 2 * 7 * 24 * 60 * 60 * 1000
+
 const validateSequenceItems = (_name = 'schedule.sequence') => {
   const validate = (sItem, i) => {
     const name = _name + '[' + i + ']'
@@ -16,12 +20,13 @@ const validateSequenceItems = (_name = 'schedule.sequence') => {
     a.strictEqual(typeof sItem.departure, 'number', name + '.departure must be an object')
     if (i === 0) {
       a.strictEqual(sItem.departure, name + '.departure must be an 0')
+    } else {
+      a.ok(sItem.departure < twoWeeks, name + '.departure must b a relative value')
     }
-    // todo: check if in a reasonable range
 
     if (!is.null(sItem.arrival) && !is.undefined(sItem.arrival)) {
       a.strictEqual(typeof sItem.arrival, 'number', name + '.arrival must be an object')
-      // todo: check if in a reasonable range
+      a.ok(sItem.arrival < twoWeeks, name + '.arrival must b a relative value')
     }
   }
   return validate

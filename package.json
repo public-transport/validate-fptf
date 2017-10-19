@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@sindresorhus/is": "^0.3.0",
+    "is-coordinates": "^2.0.2",
     "is-currency-code": "^1.2.0",
     "slugg": "^1.2.1"
   },

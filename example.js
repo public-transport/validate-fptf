@@ -9,7 +9,11 @@ validate({
     origin: {
       type: 'station',
       id: '12345678',
-      name: 'Foo'
+      name: 'Foo',
+      coordinates: {
+        longitude: -20,
+        latitude: 30
+      }
     },
     destination: {
       type: 'station',
