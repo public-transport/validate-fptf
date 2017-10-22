@@ -22,7 +22,8 @@ const validateSequenceItems = (_name = 'schedule.sequence') => {
 
     a.ok(is.object(sItem) && !is.array(sItem), name + ' must be an object')
 
-    if (isField(sItem, 'departure') || i !== lastI) {
+    const hasDeparture = isField(sItem, 'departure') || i !== lastI
+    if (hasDeparture) {
       a.strictEqual(typeof sItem.departure, 'number', name + '.departure must be a number')
     }
     if (i === 0) {
@@ -34,6 +35,10 @@ const validateSequenceItems = (_name = 'schedule.sequence') => {
     if (isField(sItem, 'arrival') || i === lastI) {
       a.strictEqual(typeof sItem.arrival, 'number', name + '.arrival must be a number')
       a.ok(sItem.arrival < twoWeeks, name + '.arrival must b a relative value')
+
+      if (hasDeparture) {
+        a.ok(sItem.arrival < sItem.departure, name + '.arrival must be < ' + name + '.departure')
+      }
     }
   }
   return validateSequenceItem
