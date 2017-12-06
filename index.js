@@ -6,6 +6,7 @@ const is = require('@sindresorhus/is')
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 
+const location = require('./location')
 const station = require('./station')
 const stop = require('./stop')
 const line = require('./line')
@@ -18,6 +19,7 @@ const journey = require('./journey')
 const validTypes = require('./lib/valid-types')
 
 const validators = {
+  location,
   station,
   stop,
   line,
