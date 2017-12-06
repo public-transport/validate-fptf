@@ -22,9 +22,9 @@
     "transit"
   ],
   "author": "Jannis R <mail@jannisr.de>",
-  "homepage": "https://github.com/derhuerst/validate-fptf",
-  "repository": "derhuerst/validate-fptf",
-  "bugs": "https://github.com/derhuerst/validate-fptf/issues",
+  "homepage": "https://github.com/public-transport/validate-fptf",
+  "repository": "public-transport/validate-fptf",
+  "bugs": "https://github.com/public-transport/validate-fptf/issues",
   "license": "ISC",
   "engines": {
     "node": ">=6"
