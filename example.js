@@ -10,7 +10,8 @@ validate({
       type: 'station',
       id: '12345678',
       name: 'Foo',
-      coordinates: {
+      location: {
+        type: 'location',
         longitude: -20,
         latitude: 30
       }
