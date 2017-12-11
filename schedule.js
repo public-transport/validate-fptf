@@ -62,6 +62,9 @@ const validateSchedule = (valItem, schedule, name = 'schedule') => {
   valItem(['route'], schedule.route, name + '.route')
 
   validateMode(schedule.mode, name + '.mode')
+  if (!is.undefined(schedule.subMode)) {
+    a.fail(name + '.subMode is reserved and should not be used for now')
+  }
 
   a.ok(Array.isArray(schedule.sequence), name + '.sequence must be an array')
   a.ok(schedule.sequence.length > 0, name + '.sequence can\'t be empty')

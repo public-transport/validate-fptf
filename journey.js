@@ -40,6 +40,9 @@ const validateLegs = (valItem, _name = 'schedule.legs') => {
     if (isField(leg, 'mode')) {
       validateMode(leg.mode, name + '.mode')
     }
+    if (!is.undefined(leg.subMode)) {
+      a.fail(name + '.subMode is reserved and should not be used for now')
+    }
 
     if (isField(leg, 'public')) {
       a.strictEqual(typeof leg.public, 'boolean', name + '.public must be a boolean')

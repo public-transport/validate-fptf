@@ -18,6 +18,9 @@ const validateLine = (valItem, line, name = 'line') => {
   a.ok(line.name.length > 0, name + '.name can\'t be empty')
 
   validateMode(line.mode, name + '.mode')
+  if (!is.undefined(line.subMode)) {
+    a.fail(name + '.subMode is reserved an should not be used for now')
+  }
 
   // todo: routes
 

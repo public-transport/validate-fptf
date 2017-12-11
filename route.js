@@ -19,6 +19,9 @@ const validateRoute = (valItem, route, name = 'route') => {
   if (!is.null(route.mode) && !is.undefined(route.mode)) {
     validateMode(route.mode, name + '.mode')
   }
+  if (!is.undefined(route.subMode)) {
+    a.fail(name + '.subMode is reserved and should not be used for now')
+  }
 
   a.ok(Array.isArray(route.stops), name + '.stops must be an array')
   for (let i = 0; i < route.stops; i++) {
