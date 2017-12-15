@@ -1,19 +1,12 @@
 {
   "name": "validate-fptf",
   "description": "Validate data in the Friendly Public Transport Format.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "files": [
     "index.js",
     "lib",
-    "line.js",
-    "station.js",
-    "stop.js",
-    "region.js",
-    "route.js",
-    "schedule.js",
-    "operator.js",
-    "journey.js"
+    "*.js"
   ],
   "keywords": [
     "fptf",
