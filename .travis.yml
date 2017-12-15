@@ -5,5 +5,5 @@ node_js:
   - '8'
   - '6'
 script:
+  - npm test
   - npm run lint
-  - node example.js

@@ -36,10 +36,13 @@
     "slugg": "^1.2.1"
   },
   "devDependencies": {
-    "standard": "^10.0.3"
+    "friendly-public-transport-format": "^1.0.1",
+    "standard": "^10.0.3",
+    "tape": "^4.8.0"
   },
   "scripts": {
+    "test": "node test.js",
     "lint": "standard",
-    "prepublishOnly": "npm run lint"
+    "prepublishOnly": "npm run test && npm run lint"
   }
 }
