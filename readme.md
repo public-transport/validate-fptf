@@ -1,6 +1,6 @@
 # validate-fptf
 
-**Validate data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).** Follows the version of the [*Friendly Public Transport Format* (FPTF) spec](https://github.com/public-transport/friendly-public-transport-format).
+**Validate data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).** Currently validates against [*Friendly Public Transport Format* (FPTF) `1.0.1`](https://github.com/public-transport/friendly-public-transport-format/blob/1.0.1/spec/readme.md).
 
 [![npm version](https://img.shields.io/npm/v/validate-fptf.svg)](https://www.npmjs.com/package/validate-fptf)
 [![build status](https://img.shields.io/travis/public-transport/validate-fptf.svg)](https://travis-ci.org/public-transport/validate-fptf)
@@ -57,7 +57,7 @@ validate({
 validate(obj)
 ```
 
-Recursively walks `obj`. Throws an [`AssertionError`](https://nodejs.org/api/errors.html#errors_class_assertionerror) if something is not valid [FPTF](https://github.com/public-transport/friendly-public-transport-format).
+Recursively walks `obj`. Throws an [`AssertionError`](https://nodejs.org/api/errors.html#errors_class_assertionerror) if something is not valid [FPTF `1.0.1`](https://github.com/public-transport/friendly-public-transport-format/blob/1.0.1/spec/readme.md).
 
 
 ## Contributing
