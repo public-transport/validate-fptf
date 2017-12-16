@@ -47,4 +47,5 @@ const recurse = (allowedTypes, any, name = 'item') => {
 
 const validate = any => recurse(validTypes, any, 'obj')
 
+validate.recurse = recurse
 module.exports = validate
