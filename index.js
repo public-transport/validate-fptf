@@ -18,7 +18,7 @@ const journey = require('./journey')
 
 const validTypes = require('./lib/valid-types')
 
-const validators = {
+const defaultValidators = {
   location,
   station,
   stop,
@@ -30,22 +30,29 @@ const validators = {
   journey
 }
 
-const recurse = (allowedTypes, any, name = 'item') => {
-  const typesStr = allowedTypes.join(', ')
+const createRecurse = (validators) => {
+  const recurse = (allowedTypes, any, name = 'item') => {
+    const typesStr = allowedTypes.join(', ')
 
-  if (is.object(any) && !is.array(any)) {
-    validateItem(any, name)
+    if (is.object(any) && !is.array(any)) {
+      validateItem(any, name)
 
-    a.ok(allowedTypes.includes(any.type), name + '.type must be any of' + typesStr)
+      a.ok(allowedTypes.includes(any.type), name + '.type must be any of' + typesStr)
 
-    const validator = validators[any.type]
-    validator(recurse, any, name)
-  } else {
-    validateReference(any, name)
+      const validator = validators[any.type]
+      validator(recurse, any, name)
+    } else {
+      validateReference(any, name)
+    }
   }
+  return recurse
 }
 
-const validate = any => recurse(validTypes, any, 'obj')
+const validate = (any, validators = defaultValidators) => {
+  const recurse = createRecurse(validators)
+  return recurse(validTypes, any, 'obj')
+}
 
-validate.recurse = recurse
+validate.createRecurse = createRecurse
+validate.recurse = createRecurse(defaultValidators)
 module.exports = validate

@@ -54,10 +54,12 @@ validate({
 ## API
 
 ```js
-validate(obj)
+validate(obj, [validators])
 ```
 
 Recursively walks `obj`. Throws an [`AssertionError`](https://nodejs.org/api/errors.html#errors_class_assertionerror) if something is not valid [FPTF `1.0.1`](https://github.com/public-transport/friendly-public-transport-format/blob/1.0.1/spec/readme.md).
+
+You may provide an object `validators`, where each key is an *FPTF* type, and the corresponding function validates an *FPTF* object of this type.
 
 
 ## Contributing
