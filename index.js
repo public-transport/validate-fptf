@@ -53,6 +53,7 @@ const validate = (any, validators = defaultValidators) => {
   return recurse(validTypes, any, 'obj')
 }
 
+validate.defaultValidators = defaultValidators
 validate.createRecurse = createRecurse
 validate.recurse = createRecurse(defaultValidators)
 module.exports = validate
