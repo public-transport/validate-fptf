@@ -28,10 +28,10 @@ test('fails with invalid-journey.json from FPTF', (t) => {
 })
 
 test('lets you override the validators', (t) => {
-	t.doesNotThrow(() => {
-		validateFptf(invalidJourney, {
-			journey: () => {}
-		})
-	})
-	t.end()
+  t.doesNotThrow(() => {
+    validateFptf(invalidJourney, {
+      journey: () => {}
+    })
+  })
+  t.end()
 })
