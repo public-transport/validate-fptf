@@ -35,6 +35,15 @@ const validateLegs = (valItem, _name = 'schedule.legs') => {
       a.ok(leg.arrivalPlatform.length > 0, name + '.arrivalPlatform can\'t be empty')
     }
 
+    if (isField(leg, 'departureDelay')) {
+      a.strictEqual(typeof leg.departureDelay, 'number', name + '.departureDelay must be a number')
+      a.ok(leg.departureDelay >= 0, name + '.departureDelay must be >= 0')
+    }
+    if (isField(leg, 'arrivalDelay')) {
+      a.strictEqual(typeof leg.arrivalDelay, 'number', name + '.arrivalDelay must be a number')
+      a.ok(leg.arrivalDelay >= 0, name + '.arrivalDelay must be >= 0')
+    }
+
     valItem(['schedule'], leg.schedule, name + '.schedule')
 
     if (isField(leg, 'mode')) {
