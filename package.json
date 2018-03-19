@@ -19,6 +19,7 @@
   "repository": "public-transport/validate-fptf",
   "bugs": "https://github.com/public-transport/validate-fptf/issues",
   "license": "ISC",
+  "fptf": "1.0.1",
   "engines": {
     "node": ">=6"
   },
