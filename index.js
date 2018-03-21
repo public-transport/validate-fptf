@@ -31,26 +31,26 @@ const defaultValidators = {
 }
 
 const createRecurse = (validators) => {
-  const recurse = (allowedTypes, any, name = 'item') => {
+  const recurse = (allowedTypes, item, name = 'item') => {
     const typesStr = allowedTypes.join(', ')
 
-    if (is.object(any) && !is.array(any)) {
-      validateItem(any, name)
+    if (is.object(item) && !is.array(item)) {
+      validateItem(item, name)
 
-      a.ok(allowedTypes.includes(any.type), name + '.type must be any of' + typesStr)
+      a.ok(allowedTypes.includes(item.type), name + '.type must be any of' + typesStr)
 
-      const validator = validators[any.type]
-      validator(recurse, any, name)
+      const validator = validators[item.type]
+      validator(recurse, item, name)
     } else {
-      validateReference(any, name)
+      validateReference(item, name)
     }
   }
   return recurse
 }
 
-const validate = (any, validators = defaultValidators) => {
+const validate = (item, validators = defaultValidators) => {
   const recurse = createRecurse(validators)
-  return recurse(validTypes, any, 'obj')
+  return recurse(validTypes, item, 'obj')
 }
 
 validate.defaultValidators = defaultValidators
