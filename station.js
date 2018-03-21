@@ -27,9 +27,9 @@ const validateStation = (valItem, station, name = 'station') => {
 
   if (!is.null(station.regions) && !is.undefined(station.regions)) {
     a.ok(Array.isArray(station.regions), name + '.regions must be an array')
-    for (let i = 0; i < station.regions; i++) {
+    for (let i = 0; i < station.regions.length; i++) {
       const r = station.regions[i]
-      valItem(['region'], r, name + `regions[${i}]`)
+      valItem(['region'], r, name + `.regions[${i}]`)
     }
   }
 }
