@@ -1,7 +1,7 @@
 {
   "name": "validate-fptf",
   "description": "Validate data in the Friendly Public Transport Format.",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "index.js",
   "files": [
     "index.js",

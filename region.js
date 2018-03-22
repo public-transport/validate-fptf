@@ -16,9 +16,9 @@ const validateRegion = (valItem, region, name = 'region') => {
   a.ok(region.name.length > 0, name + '.name can\'t be empty')
 
   a.ok(Array.isArray(region.stations), name + '.stations must be an array')
-  for (let i = 0; i < region.stations; i++) {
+  for (let i = 0; i < region.stations.length; i++) {
     const s = region.stations[i]
-    valItem(['station'], s, name + `stations[${i}]`)
+    valItem(['station'], s, name + `.stations[${i}]`)
   }
 }
 
