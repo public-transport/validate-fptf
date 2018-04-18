@@ -3,7 +3,6 @@
 const a = require('assert')
 const is = require('@sindresorhus/is')
 
-const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
 
 const location = require('./location')
