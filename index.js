@@ -15,6 +15,7 @@ const route = require('./route')
 const schedule = require('./schedule')
 const operator = require('./operator')
 const journey = require('./journey')
+const journeyLeg = require('./journey-leg')
 
 const validTypes = require('./lib/valid-types')
 
@@ -27,7 +28,8 @@ const defaultValidators = {
   route,
   schedule,
   operator,
-  journey
+  journey,
+  journeyLeg
 }
 
 const createRecurse = (validators) => {
