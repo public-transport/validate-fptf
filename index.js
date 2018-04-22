@@ -30,10 +30,13 @@ const defaultValidators = {
   item
 }
 
-const validate = (item, validators = defaultValidators) => {
-  const ctx = Object.assign({}, validators)
-  anyOf(validTypes, ctx, item, 'obj')
+const createValidate = (validators = {}) => {
+  const val = Object.assign({}, defaultValidators, validators)
+  const validate = (item, name = 'item') => {
+    anyOf(Object.keys(val), val, item, name)
+  }
+  return validate
 }
 
-validate.defaultValidators = defaultValidators
-module.exports = validate
+createValidate.defaultValidators = defaultValidators
+module.exports = createValidate

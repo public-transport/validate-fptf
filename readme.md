@@ -18,7 +18,9 @@ npm install validate-fptf
 ## Usage
 
 ```js
-const validate = require('validate-fptf')
+const createValidate = require('validate-fptf')
+
+const validate = createValidate() // you may pass in custom validators here
 
 validate({
   type: 'journey',
