@@ -5,7 +5,6 @@ const is = require('@sindresorhus/is')
 
 const validateItem = require('./lib/item')
 const validateReference = require('./lib/reference')
-const validateLocation = require('./location')
 
 const validateStation = (valItem, station, name = 'station') => {
   validateItem(station, name)
@@ -18,7 +17,7 @@ const validateStation = (valItem, station, name = 'station') => {
   a.ok(station.name.length > 0, name + '.name can\'t be empty')
 
   if (!is.null(station.location) && !is.undefined(station.location)) {
-    validateLocation(valItem, station.location, name + '.location')
+    valItem(['location'], station.location, name + '.location')
   }
 
   if (!is.null(station.coordinates) && !is.undefined(station.coordinates)) {
