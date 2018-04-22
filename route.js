@@ -3,18 +3,16 @@
 const a = require('assert')
 const is = require('@sindresorhus/is')
 
-const validateItem = require('./lib/item')
-const validateReference = require('./lib/reference')
 const validateMode = require('./lib/mode')
 
-const validateRoute = (valItem, route, name = 'route') => {
-  validateItem(route, name)
+const validateRoute = (val, route, name = 'route') => {
+  val.item(val, route, name)
 
   a.strictEqual(route.type, 'route', name + '.type must be `route`')
 
-  validateReference(route.id, name + '.id')
+  val.ref(val, route.id, name + '.id')
 
-  valItem(['line'], route.line, name + '.line')
+  val.line(val, route.line, name + '.line')
 
   if (!is.null(route.mode) && !is.undefined(route.mode)) {
     validateMode(route.mode, name + '.mode')
@@ -26,7 +24,7 @@ const validateRoute = (valItem, route, name = 'route') => {
   a.ok(Array.isArray(route.stops), name + '.stops must be an array')
   for (let i = 0; i < route.stops; i++) {
     const s = route.stops[i]
-    valItem(['stop'], s, name + `stops[${i}]`)
+    val.stop(val, s, name + `stops[${i}]`)
   }
 }
 

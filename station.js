@@ -3,21 +3,18 @@
 const a = require('assert')
 const is = require('@sindresorhus/is')
 
-const validateItem = require('./lib/item')
-const validateReference = require('./lib/reference')
-
-const validateStation = (valItem, station, name = 'station') => {
-  validateItem(station, name)
+const validateStation = (val, station, name = 'station') => {
+  val.item(val, station, name)
 
   a.strictEqual(station.type, 'station', name + '.type must be `station`')
 
-  validateReference(station.id, name + '.id')
+  val.ref(val, station.id, name + '.id')
 
   a.strictEqual(typeof station.name, 'string', name + '.name must be a string')
   a.ok(station.name.length > 0, name + '.name can\'t be empty')
 
   if (!is.null(station.location) && !is.undefined(station.location)) {
-    valItem(['location'], station.location, name + '.location')
+    val.location(val, station.location, name + '.location')
   }
 
   if (!is.null(station.coordinates) && !is.undefined(station.coordinates)) {
@@ -28,7 +25,7 @@ const validateStation = (valItem, station, name = 'station') => {
     a.ok(Array.isArray(station.regions), name + '.regions must be an array')
     for (let i = 0; i < station.regions.length; i++) {
       const r = station.regions[i]
-      valItem(['region'], r, name + `.regions[${i}]`)
+      val.region(val, r, name + `.regions[${i}]`)
     }
   }
 }

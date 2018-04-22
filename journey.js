@@ -4,24 +4,21 @@ const is = require('@sindresorhus/is')
 const a = require('assert')
 const isCurrencyCode = require('is-currency-code')
 
-const validateItem = require('./lib/item')
-const validateReference = require('./lib/reference')
-
 const isField = (obj, f) => {
   return !is.null(obj[f]) && !is.undefined(obj[f])
 }
 
-const validateJourney = (valItem, journey, name = 'journey') => {
-  validateItem(journey, name)
+const validateJourney = (val, journey, name = 'journey') => {
+  val.item(val, journey, name)
 
   a.strictEqual(journey.type, 'journey', name + '.type must be `journey`')
 
-  validateReference(journey.id, name + '.id')
+  val.ref(val, journey.id, name + '.id')
 
   a.ok(Array.isArray(journey.legs), name + '.legs must be an array')
   a.ok(journey.legs.length > 0, name + '.legs can\'t be empty')
   for (let i = 0; i < journey.legs.length; i++) {
-    valItem('journeyLeg', journey.legs[i], name + `.legs[${i}]`)
+    val.journeyLeg(val, journey.legs[i], name + `.legs[${i}]`)
   }
   // todo: check if sorted correctly
 

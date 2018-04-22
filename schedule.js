@@ -3,8 +3,6 @@
 const a = require('assert')
 const is = require('@sindresorhus/is')
 
-const validateItem = require('./lib/item')
-const validateReference = require('./lib/reference')
 const validateMode = require('./lib/mode')
 
 // The threshold above which we can safely consider a sequence
@@ -52,14 +50,14 @@ const validateStarts = (name = 'schedule.starts') => {
   return validateStart
 }
 
-const validateSchedule = (valItem, schedule, name = 'schedule') => {
-  validateItem(schedule, name)
+const validateSchedule = (val, schedule, name = 'schedule') => {
+  val.item(val, schedule, name)
 
   a.strictEqual(schedule.type, 'schedule', name + '.type must be `schedule`')
 
-  validateReference(schedule.id, name + '.id')
+  val.ref(val, schedule.id, name + '.id')
 
-  valItem(['route'], schedule.route, name + '.route')
+  val.route(val, schedule.route, name + '.route')
 
   validateMode(schedule.mode, name + '.mode')
   if (!is.undefined(schedule.subMode)) {

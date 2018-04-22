@@ -3,11 +3,10 @@
 const a = require('assert')
 const is = require('@sindresorhus/is')
 
-const validateItem = require('./lib/item')
 const validateCoordinates = require('./lib/coordinates')
 
-const validateLocation = (valItem, loc, name = 'location') => {
-  validateItem(loc, name, false)
+const validateLocation = (val, loc, name = 'location') => {
+  val.item(val, loc, name, false)
 
   a.strictEqual(loc.type, 'location', name + '.type must be `location`')
 

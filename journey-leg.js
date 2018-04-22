@@ -3,6 +3,7 @@
 const is = require('@sindresorhus/is')
 const a = require('assert')
 
+const anyOf = require('./lib/any-of')
 const validateDate = require('./lib/date')
 const validateMode = require('./lib/mode')
 
@@ -10,12 +11,16 @@ const isField = (obj, f) => {
   return !is.null(obj[f]) && !is.undefined(obj[f])
 }
 
-const validateJourneyLeg = (valItem, leg, name = 'journeyLeg') => {
+const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
   a.ok(is.object(leg) && !is.array(leg), name + ' must be an object')
 
-  valItem(['station', 'stop', 'location'], leg.origin, name + '.origin')
+  anyOf([
+    'station', 'stop', 'location'
+  ], val, leg.origin, name + '.origin')
 
-  valItem(['station', 'stop', 'location'], leg.destination, name + '.destination')
+  anyOf([
+    'station', 'stop', 'location'
+  ], val, leg.destination, name + '.destination')
 
   validateDate(leg.departure, name + '.departure')
   validateDate(leg.arrival, name + '.arrival')
@@ -38,7 +43,7 @@ const validateJourneyLeg = (valItem, leg, name = 'journeyLeg') => {
     a.ok(leg.arrivalDelay >= 0, name + '.arrivalDelay must be >= 0')
   }
 
-  valItem(['schedule'], leg.schedule, name + '.schedule')
+  val.schedule(val, leg.schedule, name + '.schedule')
 
   if (isField(leg, 'mode')) {
     validateMode(leg.mode, name + '.mode')
@@ -51,7 +56,7 @@ const validateJourneyLeg = (valItem, leg, name = 'journeyLeg') => {
     a.strictEqual(typeof leg.public, 'boolean', name + '.public must be a boolean')
   }
 
-  valItem(['operator'], leg.operator, name + '.operator')
+  val.operator(val, leg.operator, name + '.operator')
 }
 
 module.exports = validateJourneyLeg
