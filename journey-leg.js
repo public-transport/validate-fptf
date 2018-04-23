@@ -43,7 +43,7 @@ const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
     a.ok(leg.arrivalDelay >= 0, name + '.arrivalDelay must be >= 0')
   }
 
-  val.schedule(val, leg.schedule, name + '.schedule')
+  anyOf(['schedule', 'ref'], val, leg.schedule, name + '.schedule')
 
   if (isField(leg, 'mode')) {
     validateMode(leg.mode, name + '.mode')
@@ -56,7 +56,7 @@ const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
     a.strictEqual(typeof leg.public, 'boolean', name + '.public must be a boolean')
   }
 
-  val.operator(val, leg.operator, name + '.operator')
+  anyOf(['operator', 'ref'], val, leg.operator, name + '.operator')
 }
 
 module.exports = validateJourneyLeg

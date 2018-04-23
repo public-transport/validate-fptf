@@ -3,6 +3,7 @@
 const a = require('assert')
 const is = require('@sindresorhus/is')
 
+const anyOf = require('./lib/any-of')
 const validateMode = require('./lib/mode')
 
 // The threshold above which we can safely consider a sequence
@@ -57,7 +58,7 @@ const validateSchedule = (val, schedule, name = 'schedule') => {
 
   val.ref(val, schedule.id, name + '.id')
 
-  val.route(val, schedule.route, name + '.route')
+  anyOf(['route', 'ref'], val, schedule.route, name + '.route')
 
   validateMode(schedule.mode, name + '.mode')
   if (!is.undefined(schedule.subMode)) {

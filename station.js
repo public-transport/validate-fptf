@@ -25,7 +25,7 @@ const validateStation = (val, station, name = 'station') => {
     a.ok(Array.isArray(station.regions), name + '.regions must be an array')
     for (let i = 0; i < station.regions.length; i++) {
       const r = station.regions[i]
-      val.region(val, r, name + `.regions[${i}]`)
+      anyOf(['region', 'ref'], val, r, name + `.regions[${i}]`)
     }
   }
 }
