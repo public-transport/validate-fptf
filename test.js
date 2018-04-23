@@ -5,33 +5,35 @@ const validJourney = require('friendly-public-transport-format/examples/valid-jo
 const validSimpleJourney = require('friendly-public-transport-format/examples/valid-simple-journey.json')
 const invalidJourney = require('friendly-public-transport-format/examples/invalid-journey.json')
 
-const validateFptf = require('.')
+const createValidate = require('.')
+const validate = createValidate()
 
 test('passes with valid-journey.json from FPTF', (t) => {
-  t.doesNotThrow(() => validateFptf(validJourney))
-  t.doesNotThrow(() => validateFptf(validSimpleJourney))
-  t.throws(() => validateFptf(invalidJourney))
+  t.doesNotThrow(() => validate(validJourney))
+  t.doesNotThrow(() => validate(validSimpleJourney))
+  t.throws(() => validate(invalidJourney))
 
   t.end()
 })
 
 test('passes with valid-simple-journey.json from FPTF', (t) => {
-  t.doesNotThrow(() => validateFptf(validSimpleJourney))
+  t.doesNotThrow(() => validate(validSimpleJourney))
 
   t.end()
 })
 
 test('fails with invalid-journey.json from FPTF', (t) => {
-  t.throws(() => validateFptf(invalidJourney))
+  t.throws(() => validate(invalidJourney))
 
   t.end()
 })
 
 test('lets you override the validators', (t) => {
+  const validate = createValidate({
+    journey: () => {}
+  })
   t.doesNotThrow(() => {
-    validateFptf(invalidJourney, {
-      journey: () => {}
-    })
+    validate(invalidJourney)
   })
   t.end()
 })
