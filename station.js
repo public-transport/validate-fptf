@@ -3,6 +3,8 @@
 const a = require('assert')
 const is = require('@sindresorhus/is')
 
+const anyOf = require('./lib/any-of')
+
 const validateStation = (val, station, name = 'station') => {
   val.item(val, station, name)
 
