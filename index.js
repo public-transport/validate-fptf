@@ -13,6 +13,7 @@ const operator = require('./operator')
 const journey = require('./journey')
 const journeyLeg = require('./journey-leg')
 const reference = require('./lib/reference')
+const date = require('./lib/date')
 const item = require('./lib/item')
 
 const defaultValidators = {
@@ -27,6 +28,7 @@ const defaultValidators = {
   journey,
   journeyLeg,
   ref: reference,
+  date,
   item
 }
 

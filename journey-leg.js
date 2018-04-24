@@ -4,7 +4,6 @@ const is = require('@sindresorhus/is')
 const a = require('assert')
 
 const anyOf = require('./lib/any-of')
-const validateDate = require('./lib/date')
 const validateMode = require('./lib/mode')
 
 const isField = (obj, f) => {
@@ -22,8 +21,8 @@ const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
     'station', 'stop', 'location'
   ], val, leg.destination, name + '.destination')
 
-  validateDate(leg.departure, name + '.departure')
-  validateDate(leg.arrival, name + '.arrival')
+  val.date(val, leg.departure, name + '.departure')
+  val.date(val, leg.arrival, name + '.arrival')
 
   if (isField(leg, 'departurePlatform')) {
     a.strictEqual(typeof leg.departurePlatform, 'string', name + '.departurePlatform must be a string')
