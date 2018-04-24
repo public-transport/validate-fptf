@@ -4,7 +4,6 @@ const is = require('@sindresorhus/is')
 const a = require('assert')
 
 const anyOf = require('./lib/any-of')
-const validateMode = require('./lib/mode')
 
 const isField = (obj, f) => {
   return !is.null(obj[f]) && !is.undefined(obj[f])
@@ -45,7 +44,7 @@ const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
   anyOf(['schedule', 'ref'], val, leg.schedule, name + '.schedule')
 
   if (isField(leg, 'mode')) {
-    validateMode(leg.mode, name + '.mode')
+    val.mode(val, leg.mode, name + '.mode')
   }
   if (!is.undefined(leg.subMode)) {
     a.fail(name + '.subMode is reserved and should not be used for now')

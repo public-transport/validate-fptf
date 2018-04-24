@@ -3,8 +3,6 @@
 const a = require('assert')
 const is = require('@sindresorhus/is')
 
-const validateMode = require('./lib/mode')
-
 const validateRoute = (val, route, name = 'route') => {
   val.item(val, route, name)
 
@@ -15,7 +13,7 @@ const validateRoute = (val, route, name = 'route') => {
   val.line(val, route.line, name + '.line')
 
   if (!is.null(route.mode) && !is.undefined(route.mode)) {
-    validateMode(route.mode, name + '.mode')
+    val.mode(val, route.mode, name + '.mode')
   }
   if (!is.undefined(route.subMode)) {
     a.fail(name + '.subMode is reserved and should not be used for now')

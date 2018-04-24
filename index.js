@@ -14,6 +14,7 @@ const journey = require('./journey')
 const journeyLeg = require('./journey-leg')
 const reference = require('./lib/reference')
 const date = require('./lib/date')
+const mode = require('./lib/mode')
 const item = require('./lib/item')
 
 const defaultValidators = {
@@ -29,6 +30,7 @@ const defaultValidators = {
   journeyLeg,
   ref: reference,
   date,
+  mode,
   item
 }
 

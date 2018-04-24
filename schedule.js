@@ -4,7 +4,6 @@ const a = require('assert')
 const is = require('@sindresorhus/is')
 
 const anyOf = require('./lib/any-of')
-const validateMode = require('./lib/mode')
 
 // The threshold above which we can safely consider a sequence
 // as too long, cruise ship routes taken into account.
@@ -60,7 +59,7 @@ const validateSchedule = (val, schedule, name = 'schedule') => {
 
   anyOf(['route', 'ref'], val, schedule.route, name + '.route')
 
-  validateMode(schedule.mode, name + '.mode')
+  val.mode(val, schedule.mode, name + '.mode')
   if (!is.undefined(schedule.subMode)) {
     a.fail(name + '.subMode is reserved and should not be used for now')
   }
