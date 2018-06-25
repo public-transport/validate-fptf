@@ -41,6 +41,13 @@ const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
     a.ok(leg.arrivalDelay >= 0, name + '.arrivalDelay must be >= 0')
   }
 
+  if (isField(leg, 'stopovers')) {
+    a.ok(Array.isArray(leg.stopovers), name + '.stopovers must be an array')
+    for (let i = 0; i < leg.stopovers.length; i++) {
+      val.stopover(val, leg.stopovers[i], `${name}.stopovers[${i}]`)
+    }
+  }
+
   anyOf(['schedule', 'ref'], val, leg.schedule, name + '.schedule')
 
   if (isField(leg, 'mode')) {

@@ -10,6 +10,7 @@ const region = require('./region')
 const route = require('./route')
 const schedule = require('./schedule')
 const operator = require('./operator')
+const stopover = require('./stopover')
 const journey = require('./journey')
 const journeyLeg = require('./journey-leg')
 const reference = require('./lib/reference')
@@ -26,6 +27,7 @@ const defaultValidators = {
   route,
   schedule,
   operator,
+  stopover,
   journey,
   journeyLeg,
   ref: reference,
