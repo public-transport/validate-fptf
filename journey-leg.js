@@ -48,7 +48,9 @@ const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
     }
   }
 
-  anyOf(['schedule', 'ref'], val, leg.schedule, name + '.schedule')
+  if (isField(leg, 'schedule')) {
+    anyOf(['schedule', 'ref'], val, leg.schedule, name + '.schedule')
+  }
 
   if (isField(leg, 'mode')) {
     val.mode(val, leg.mode, name + '.mode')

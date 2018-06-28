@@ -1,7 +1,7 @@
 {
   "name": "validate-fptf",
   "description": "Validate data in the Friendly Public Transport Format.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "main": "index.js",
   "files": [
     "index.js",
@@ -19,7 +19,7 @@
   "repository": "public-transport/validate-fptf",
   "bugs": "https://github.com/public-transport/validate-fptf/issues",
   "license": "ISC",
-  "fptf": "1.1.1",
+  "fptf": "1.1.2",
   "engines": {
     "node": ">=6"
   },
