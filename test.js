@@ -10,8 +10,6 @@ const validate = createValidate()
 
 test('passes with valid-journey.json from FPTF', (t) => {
   t.doesNotThrow(() => validate(validJourney))
-  t.doesNotThrow(() => validate(validSimpleJourney))
-  t.throws(() => validate(invalidJourney))
 
   t.end()
 })
@@ -24,6 +22,20 @@ test('passes with valid-simple-journey.json from FPTF', (t) => {
 
 test('fails with invalid-journey.json from FPTF', (t) => {
   t.throws(() => validate(invalidJourney))
+
+  t.end()
+})
+
+test('passes with valid-journey.json from FPTF when validating against journey type', (t) => {
+  t.doesNotThrow(() => validate(validJourney, 'journey'))
+  t.doesNotThrow(() => validate(validJourney, ['journey', 'schedule']))
+
+  t.end()
+})
+
+test('fails with valid-journey.json from FPTF when validating against non-journey type', (t) => {
+  t.throws(() => validate(validJourney, 'schedule'))
+  t.throws(() => validate(validJourney, ['stop', 'station']))
 
   t.end()
 })

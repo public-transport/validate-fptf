@@ -50,18 +50,39 @@ validate({
     currency: 'EUR'
   }
 })
+
+validate({
+  type: 'station',
+  id: '123',
+  name: 'foo',
+  location: {
+    type: 'location',
+    latitude: 1,
+    longitude: 2
+  }
+}, ['station', 'stop'])
 ```
 
 
 ## API
 
 ```js
-validate(obj, [validators])
+createValidate([validators])
+```
+
+Returns the `validate` method below.
+
+You may provide an object `validators`, where each key is an *FPTF* type, and the corresponding function validates an *FPTF* object of this type.
+
+```js
+validate(obj, [types], [name])
 ```
 
 Recursively walks `obj`. Throws an [`AssertionError`](https://nodejs.org/api/errors.html#errors_class_assertionerror) if something is not valid [FPTF `1.0.1`](https://github.com/public-transport/friendly-public-transport-format/blob/1.0.1/spec/readme.md).
 
-You may provide an object `validators`, where each key is an *FPTF* type, and the corresponding function validates an *FPTF* object of this type.
+You may provide a string or an array `types` to validate against one or multiple specific FPTF object types.
+
+It is possible to specify a name for the root element by providing the `name` parameter.
 
 
 ## Contributing
