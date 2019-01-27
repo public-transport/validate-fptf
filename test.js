@@ -26,15 +26,17 @@ test('fails with invalid-journey.json from FPTF', (t) => {
   t.end()
 })
 
-test('passes with valid-journey.json from FPTF when validating against journey type', (t) => {
+test('against FPTF/valid-journey.json: passes with `journey` type', (t) => {
   t.doesNotThrow(() => validate(validJourney, 'journey'))
+  t.doesNotThrow(() => validate(validJourney, ['journey']))
   t.doesNotThrow(() => validate(validJourney, ['journey', 'schedule']))
 
   t.end()
 })
 
-test('fails with valid-journey.json from FPTF when validating against non-journey type', (t) => {
+test('against FPTF/valid-journey.json: fails with non-`journey` type', (t) => {
   t.throws(() => validate(validJourney, 'schedule'))
+  t.throws(() => validate(validJourney, ['schedule']))
   t.throws(() => validate(validJourney, ['stop', 'station']))
 
   t.end()

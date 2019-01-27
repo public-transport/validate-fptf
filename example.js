@@ -8,6 +8,8 @@ const createValidate = require('.')
 
 const validate = createValidate()
 
+// all valid
 validate(validJourney)
 validate(validStation, 'station')
+validate(validStation, ['station'])
 validate(validStop, ['station', 'stop'])
