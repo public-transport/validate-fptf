@@ -38,11 +38,16 @@ const defaultValidators = {
 
 const createValidate = (validators = {}) => {
   const val = Object.assign({}, defaultValidators, validators)
-  const validate = (item, types = undefined, name = 'item') => {
-    if (!types) anyOf(Object.keys(val), val, item, name)
-    else if (typeof types === 'string') defaultValidators[types](val, item, name)
-    else if (Array.isArray(types)) anyOf(types, val, item, name)
-    else throw new TypeError('types has to be of type undefined, string or array')
+  const allTypes = Object.keys(val)
+
+  const validate = (item, types = null, name = 'item') => {
+    if (typeof types === 'string') types = [types]
+    else if (types === null) types = allTypes
+    else if (!Array.isArray(types)) throw new Error('types must be null, a string or an array')
+
+    if (typeof name !== 'string') throw new Error('name must be a string')
+
+    anyOf(types, val, item, name)
   }
   return validate
 }

@@ -67,22 +67,20 @@ validate({
 ## API
 
 ```js
-createValidate([validators])
+const validate = createValidate(customValidators = {})
 ```
 
-Returns the `validate` method below.
-
-You may provide an object `validators`, where each key is an *FPTF* type, and the corresponding function validates an *FPTF* object of this type.
+You may provide an object `customValidators`, where each key is an *FPTF* type, and the corresponding function validates an *FPTF* object of this type.
 
 ```js
-validate(obj, [types], [name])
+validate(item, types = allTypes, name = 'item')
 ```
 
-Recursively walks `obj`. Throws an [`AssertionError`](https://nodejs.org/api/errors.html#errors_class_assertionerror) if something is not valid [FPTF `1.2.1`](https://github.com/public-transport/friendly-public-transport-format/blob/1.2.1/spec/readme.md).
+`validate` recursively validates `item`. Throws an [`AssertionError`](https://nodejs.org/api/errors.html#errors_class_assertionerror) if something is not valid [FPTF `1.2.1`](https://github.com/public-transport/friendly-public-transport-format/blob/1.2.1/spec/readme.md).
 
-You may provide a string or an array `types` to validate against one or multiple specific FPTF object types.
+To validate against one or more *specific* FPTF types, provide a string or an array of strings via the `types` parameter.
 
-It is possible to specify a name for the root element by providing the `name` parameter.
+To get more meaningful assertion errors, provide the name of your item via the `name` parameter.
 
 
 ## Contributing
