@@ -1,7 +1,7 @@
 {
   "name": "validate-fptf",
   "description": "Validate data in the Friendly Public Transport Format.",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "main": "index.js",
   "files": [
     "index.js",
@@ -19,7 +19,7 @@
   "repository": "public-transport/validate-fptf",
   "bugs": "https://github.com/public-transport/validate-fptf/issues",
   "license": "ISC",
-  "fptf": "1.1.2",
+  "fptf": "1.2.1",
   "engines": {
     "node": ">=6"
   },
@@ -29,7 +29,7 @@
     "is-currency-code": "^1.2.0"
   },
   "devDependencies": {
-    "friendly-public-transport-format": "^1.1.1",
+    "friendly-public-transport-format": "^1.2.1",
     "husky": "^0.14.3",
     "standard": "^10.0.3",
     "tape": "^4.8.0"
