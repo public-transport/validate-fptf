@@ -64,6 +64,13 @@ const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
   }
 
   anyOf(['operator', 'ref'], val, leg.operator, name + '.operator')
+
+  if (isField(leg, 'price')) {
+    a.ok(is.object(leg.price), name + '.price must be an object')
+    a.strictEqual(typeof leg.price.amount, 'number', name + '.price.amount must be a number')
+    a.strictEqual(typeof leg.price.currency, 'string', name + '.price.currency must be a string')
+    a.ok(leg.price.currency.length > 0, name + '.price.currency can\'t be empty')
+  }
 }
 
 module.exports = validateJourneyLeg
