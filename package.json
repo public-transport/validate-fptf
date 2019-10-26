@@ -21,7 +21,7 @@
   "license": "ISC",
   "fptf": "v2-draft",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "dependencies": {
     "@sindresorhus/is": "^0.3.0",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "friendly-public-transport-format": "public-transport/friendly-public-transport-format#v2-draft",
     "husky": "^0.14.3",
-    "standard": "^10.0.3",
+    "standard": "^14.3.1",
     "tape": "^4.8.0"
   },
   "scripts": {
