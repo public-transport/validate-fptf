@@ -19,7 +19,7 @@
   "repository": "public-transport/validate-fptf",
   "bugs": "https://github.com/public-transport/validate-fptf/issues",
   "license": "ISC",
-  "fptf": "1.2.1",
+  "fptf": "v2-draft",
   "engines": {
     "node": ">=6"
   },
@@ -29,7 +29,7 @@
     "is-currency-code": "^1.2.0"
   },
   "devDependencies": {
-    "friendly-public-transport-format": "^1.2.1",
+    "friendly-public-transport-format": "public-transport/friendly-public-transport-format#v2-draft",
     "husky": "^0.14.3",
     "standard": "^10.0.3",
     "tape": "^4.8.0"
