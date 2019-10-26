@@ -42,14 +42,6 @@ const validateSequenceItems = (_name = 'schedule.sequence') => {
   return validateSequenceItem
 }
 
-const validateStarts = (name = 'schedule.starts') => {
-  const validateStart = (start, i) => {
-    a.strictEqual(typeof start, 'number', name + '[' + i + '] must be a UNIX timestamp')
-    // todo: check if in a reasonable range
-  }
-  return validateStart
-}
-
 const validateSchedule = (val, schedule, name = 'schedule') => {
   val.item(val, schedule, name)
 
@@ -58,6 +50,10 @@ const validateSchedule = (val, schedule, name = 'schedule') => {
   val.ref(val, schedule.id, name + '.id')
 
   anyOf(['route', 'ref'], val, schedule.route, name + '.route')
+
+  if (isField(schedule, 'line')) {
+    anyOf(['line', 'ref'], val, schedule.line, name + '.line')
+  }
 
   val.mode(val, schedule.mode, name + '.mode')
   if (!is.undefined(schedule.subMode)) {
@@ -69,9 +65,13 @@ const validateSchedule = (val, schedule, name = 'schedule') => {
   schedule.sequence.forEach(validateSequenceItems(name + '.sequence'))
   // todo: check if sorted correctly
 
-  a.ok(Array.isArray(schedule.starts), name + '.starts must be an array')
-  a.ok(schedule.starts.length > 0, name + '.starts can\'t be empty')
-  schedule.starts.forEach(validateStarts(name + '.starts'))
+  a.ok(is.object(schedule.starts) && !is.array(schedule.starts), name + '.starts must be an object')
+  a.ok(Object.keys(schedule.starts).length > 0, name + '.starts can\'t be empty')
+  for (const key of Object.keys(schedule.starts)) {
+    const _name = `${name}.starts[${key}]`
+    val.ref(val, key, _name)
+    val.date(val, schedule.starts[key], _name)
+  }
 }
 
 module.exports = validateSchedule
