@@ -12,7 +12,7 @@ const schedule = require('./schedule')
 const operator = require('./operator')
 const stopover = require('./stopover')
 const journey = require('./journey')
-const journeyLeg = require('./journey-leg')
+const leg = require('./leg')
 const reference = require('./lib/reference')
 const date = require('./lib/date')
 const mode = require('./lib/mode')
@@ -29,7 +29,7 @@ const defaultValidators = {
   operator,
   stopover,
   journey,
-  journeyLeg,
+  leg,
   ref: reference,
   date,
   mode,

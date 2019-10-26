@@ -9,8 +9,12 @@ const isField = (obj, f) => {
   return !is.null(obj[f]) && !is.undefined(obj[f])
 }
 
-const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
-  a.ok(is.object(leg) && !is.array(leg), name + ' must be an object')
+const validateLeg = (val, leg, name = 'leg') => {
+  val.item(val, leg, name)
+
+  a.strictEqual(leg.type, 'leg', name + '.type must be `leg`')
+
+  if (isField(leg, 'id')) val.ref(val, leg.id, name + '.id')
 
   anyOf([
     'station', 'stop', 'location'
@@ -73,4 +77,4 @@ const validateJourneyLeg = (val, leg, name = 'journeyLeg') => {
   }
 }
 
-module.exports = validateJourneyLeg
+module.exports = validateLeg

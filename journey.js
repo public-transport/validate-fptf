@@ -18,7 +18,7 @@ const validateJourney = (val, journey, name = 'journey') => {
   a.ok(Array.isArray(journey.legs), name + '.legs must be an array')
   a.ok(journey.legs.length > 0, name + '.legs can\'t be empty')
   for (let i = 0; i < journey.legs.length; i++) {
-    val.journeyLeg(val, journey.legs[i], name + `.legs[${i}]`)
+    val.leg(val, journey.legs[i], name + `.legs[${i}]`)
   }
   // todo: check if sorted correctly
 
