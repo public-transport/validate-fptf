@@ -1,6 +1,6 @@
 # validate-fptf
 
-**Validate data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).** Currently validates against [*Friendly Public Transport Format* (FPTF) `1.2.1`](https://github.com/public-transport/friendly-public-transport-format/blob/1.2.1/spec/readme.md).
+**Validate data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).** Currently validates against the [*Friendly Public Transport Format* (FPTF) `2.0.0` draft](https://github.com/public-transport/friendly-public-transport-format/blob/v2-draft/spec/readme.md).
 
 [![npm version](https://img.shields.io/npm/v/validate-fptf.svg)](https://www.npmjs.com/package/validate-fptf)
 [![build status](https://img.shields.io/travis/public-transport/validate-fptf.svg)](https://travis-ci.org/public-transport/validate-fptf)
@@ -76,7 +76,7 @@ You may provide an object `customValidators`, where each key is an *FPTF* type, 
 validate(item, types = allTypes, name = 'item')
 ```
 
-`validate` recursively validates `item`. Throws an [`AssertionError`](https://nodejs.org/api/errors.html#errors_class_assertionerror) if something is not valid [FPTF `1.2.1`](https://github.com/public-transport/friendly-public-transport-format/blob/1.2.1/spec/readme.md).
+`validate` recursively validates `item`. Throws an [`AssertionError`](https://nodejs.org/api/errors.html#errors_class_assertionerror) if something is not valid [FPTF `2.0.0` draft](https://github.com/public-transport/friendly-public-transport-format/blob/v2-draft/spec/readme.md).
 
 To validate against one or more *specific* FPTF types, provide a string or an array of strings via the `types` parameter.
 

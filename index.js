@@ -8,11 +8,12 @@ const stop = require('./stop')
 const line = require('./line')
 const region = require('./region')
 const route = require('./route')
+const trip = require('./trip')
 const schedule = require('./schedule')
 const operator = require('./operator')
 const stopover = require('./stopover')
 const journey = require('./journey')
-const journeyLeg = require('./journey-leg')
+const leg = require('./leg')
 const reference = require('./lib/reference')
 const date = require('./lib/date')
 const mode = require('./lib/mode')
@@ -25,11 +26,12 @@ const defaultValidators = {
   line,
   region,
   route,
+  trip,
   schedule,
   operator,
   stopover,
   journey,
-  journeyLeg,
+  leg,
   ref: reference,
   date,
   mode,
