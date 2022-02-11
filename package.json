@@ -24,7 +24,7 @@
     "node": ">=6"
   },
   "dependencies": {
-    "@sindresorhus/is": "^0.3.0",
+    "@sindresorhus/is": "^0.17.1",
     "is-coordinates": "^2.0.2",
     "is-currency-code": "^1.2.0"
   },
